@@ -1,0 +1,12 @@
+# build_dir
+build
+cmake-build-debug
+cmake-build-release
+
+# lib
+lib
+
+# .idea
+.idea
+
+
