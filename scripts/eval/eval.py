@@ -77,8 +77,8 @@ if __name__ == '__main__':
 
         if c_det == '0':
             # print("0")
-            if z_gt>1.3:
-                continue
+            # if z_gt>1.3:
+            #     continue
             e_z_0 = e_z_0 + abs((z_det - z_gt))
             e_x_0 = e_x_0 + abs((x_det - x_gt))
             count_0 = count_0 + 1.0
@@ -86,8 +86,8 @@ if __name__ == '__main__':
             f_error_x0.write(str(x_gt) + '\t' + str(x_gt - x_gt) + '\n')
         if c_det == '1':
             # print("1")
-            if z_gt>1.3:
-                continue
+            # if z_gt>1.3:
+            #     continue
             e_z_1 = e_z_1 + abs((z_det - z_gt))
             e_x_1 = e_x_1 + abs((x_det - x_gt))
             count_1 = count_1 + 1.0
@@ -95,8 +95,8 @@ if __name__ == '__main__':
             f_error_x1.write(str(x_gt) + '\t' + str(x_gt - x_gt) + '\n')
         if c_det == '2':
             # print("2")
-            if z_gt>1.3:
-                continue
+            # if z_gt>1.3:
+            #     continue
             e_z_2 = e_z_2 + abs((z_det - z_gt))
             e_x_2 = e_x_2 + abs((x_det - x_gt))
             count_2 = count_2 + 1.0
@@ -104,8 +104,8 @@ if __name__ == '__main__':
             f_error_x2.write(str(x_gt) + '\t' + str(x_gt - x_gt) + '\n')
         if c_det == '3':
             # print("3")
-            if z_gt>1.3:
-                continue
+            # if z_gt>1.3:
+            #     continue
             e_z_3 = e_z_3 + abs((z_det - z_gt))
             e_x_3 = e_x_3 + abs((x_det - x_gt))
             count_3 = count_3 + 1.0

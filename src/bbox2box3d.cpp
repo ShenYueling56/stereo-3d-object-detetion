@@ -224,6 +224,27 @@ bool cluster_pc(pcl::PointCloud<pcl::PointXYZ>::Ptr pc_object_ptr, vector<pcl::P
 //    pcl::io::savePCDFileASCII (object_pc_before_cluster_path + clusters_file, *clusters); //将点云保存到PCD文件中
     return true;
 }
+bool trans2w(Mat Tcw, box3d b3d, box3d& b3d_w)
+{
+    Mat cur(4, 1, CV_64FC1, cv::Scalar(0));
+    cur.at<double>(0) = b3d._position_x; // attention: double not float!!!!
+    cur.at<double>(1) = b3d._position_y;
+    cur.at<double>(2) = b3d._position_z;
+    cur.at<double>(3) = 1.000000e+00;
+    Mat Twc;
+    invert(Tcw, Twc);
+    Mat world_coord = Twc * cur;
+    b3d_w._position_x = world_coord.at<double>(0);
+    b3d_w._position_y = world_coord.at<double>(1);
+    b3d_w._position_z = world_coord.at<double>(2);
+    b3d_w._score = b3d._score;
+    b3d_w._c = b3d._c;
+    cout<<cur.at<double>(0)<<";"<<cur.at<double>(1)<<";"<<cur.at<double>(2)<<";"<<cur.at<double>(3)<<endl;
+    cout<<b3d_w._position_x<<";"<<b3d_w._position_y<<";"<<b3d_w._position_z<<" "<<world_coord.at<double>(3)<<endl;
+    return true;
+
+}
+
 
 cv::Mat Cal3D_2D(pcl::PointXYZRGB point3D, Mat projectionMatrix, Size imageSize){
     cv::Mat point2D(2, 1, CV_16UC1, cv::Scalar(0));

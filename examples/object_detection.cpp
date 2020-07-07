@@ -96,6 +96,28 @@ int main(int argc,char *argv[])
     Mat P2(3,4,CV_64FC1,Scalar::all(0));
     Mat Q(4,4,CV_64FC1,Scalar::all(0));
     Mat mapl1, mapl2, mapr1, mapr2; // 图像重投影映射表
+    // todo: read the Twc from file
+    // 左相机外参
+//    [0.9998613930260787, 0.004426922294121998, 0.01604983161753834;
+//    -0.004747457841199377, 0.9997889387204514, 0.01998848809388965;
+//    -0.01595795663597199, -0.02006191344900429, 0.9996713776280529]
+//    [0.0397648383105771;
+//    0.1799994361370056;
+//    -0.01578391077428604]
+    Mat Tcw(4,4,CV_64FC1,Scalar::all(0));
+    Tcw.at<double>(0,0)= 0.9998613930260787;
+    Tcw.at<double>(0,1)= 0.004426922294121998;
+    Tcw.at<double>(0,2)= 0.01604983161753834;
+    Tcw.at<double>(1,0)= -0.004747457841199377;
+    Tcw.at<double>(1,1)= 0.9997889387204514;
+    Tcw.at<double>(1,2)= 0.01998848809388965;
+    Tcw.at<double>(2,0)= -0.01595795663597199;
+    Tcw.at<double>(2,1)= -0.02006191344900429;
+    Tcw.at<double>(2,2)= 0.9996713776280529;
+    Tcw.at<double>(0,3)= 0.0397648383105771;
+    Tcw.at<double>(1,3)= 0.1799994361370056;
+    Tcw.at<double>(2,3)= -0.01578391077428604;
+    Tcw.at<double>(3,3)= 1.0;
 
     //Step1 read camera parameters
     if (calib_method == "matlab")
@@ -195,8 +217,11 @@ int main(int argc,char *argv[])
             for(int i = 0; i<bbox_3d_list.size();i++)
             {
                 box3d b3d=bbox_3d_list[i];
-                cout<<"class:"<< b3d._c <<", p_x: "<<b3d._position_x <<", p_y: "<<b3d._position_y<<", p_z: "<<b3d._position_z<<", 2d score: "<< b3d._score<<endl;
-                fResult<<b3d._c<<" "<<b3d._position_x <<" "<<b3d._position_y<<" "<<b3d._position_z<<" "<< b3d._score<<endl;
+                box3d b3d_w;
+                trans2w(Tcw, b3d, b3d_w);
+                cout<<"class:"<< b3d_w._c <<", p_x: "<<b3d_w._position_x <<", p_y: "<<b3d_w._position_y<<", p_z: "<<b3d_w._position_z<<", 2d score: "<< b3d_w._score<<endl;
+
+                fResult<<b3d_w._c<<" "<<b3d_w._position_x <<" "<<b3d_w._position_y<<" "<<b3d_w._position_z<<" "<< b3d_w._score<<endl;
             }
         }
         else

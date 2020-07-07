@@ -52,10 +52,20 @@ target_link_libraries(
         ${OpenCV_LIBS}
 )
 
+# camera R t calibration wrt. word coordinates
+add_executable(Rt_calib
+        examples/Rt_calib.cpp
+        )
+
+target_link_libraries(
+        Rt_calib
+        MY_LIBS
+)
+
 # gen_sparities
 add_executable(gen_sparities
         examples/gen_sparities.cpp
-        )
+)
 
 target_link_libraries(
         gen_sparities

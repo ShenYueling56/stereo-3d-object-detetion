@@ -349,3 +349,4 @@ int main(int argc,char *argv[])
                 img2_rectified, mapl1, mapl2, mapr1, mapr2, validRoi);
     }
 }
+

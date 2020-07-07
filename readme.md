@@ -1,7 +1,7 @@
-#Introdution
+# Introdution
 This is a project for 3D object detection with stereo camera. With the bounding box proposals from some DL-based 2D detection methods such as YOLO and YOLO-Nano, the position of objects can be obtained through stereo reconstruction.
-#How to use
-##Dataset Preparation 
+# How to use
+## Dataset Preparation 
 ```
 .
 ├── 2d_objects
@@ -17,8 +17,8 @@ This is a project for 3D object detection with stereo camera. With the bounding 
     ├── left
     └── right
 ```
-##Stereo Calibration
-####OpenCV method
+## Stereo Calibration
+#### OpenCV method
 ```
 # gen calib file list
 python ../scripts/gen_file_list/gen_file_list.py /home/shenyl/Documents/sweeper/data/exp0702/calib_img/
@@ -28,13 +28,13 @@ python ../scripts/gen_file_list/gen_file_list.py /home/shenyl/Documents/sweeper/
 # To vertify, the rectified image pairs can be shown
 ./stereo_calib -w=11 -h=8 -s=15 -d=/home/shenyl/Documents/sweeper/data/exp0702/./stereo_calib -w=11 -h=8 -s=15 -d=/home/shenyl/Documents/sweeper/data/exp0702/calib_img/ -show=true
 ```
-####matlab method
+#### matlab method
 ```
 # run stereoCameraCalibrator in matlab
 # run matlab_calib.m in ./scripts/matlab_calib/
 # change the parameters in /home/shenyl/Documents/sweeper/data/exp0702/calib_img/stereocalibrateresult_matlab.txt
 ```
-##Generate rectified images
+## Generate rectified images
 The images should be rectified before feeding into 2D detection networks.
 ```
 python ../scripts/gen_file_list/gen_file_list.py /home/shenyl/Documents/sweeper/data/exp0702/img/
@@ -54,7 +54,7 @@ python ../scripts/gen_file_list/gen_file_list.py /home/shenyl/Documents/sweeper/
 
 ```
 
-##Object Detection
+## Object Detection
 ```
 # use opencv calib result and sgbm stereo matching method
 ./object_detection -d=/home/shenyl/Documents/sweeper/data/exp0702/ -c=opencv -a=sgbm
