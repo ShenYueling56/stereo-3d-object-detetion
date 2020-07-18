@@ -18,6 +18,8 @@ using namespace std;
 
 Mat img1;
 Mat img2;
+Mat img3;
+Mat img4;
 static vector<Point2f> points;
 
 static int print_help()
@@ -57,7 +59,7 @@ bool read_3d_points(string points3d_path, vector<Point3f>& points3d)
         p_3d.x=x;
         p_3d.y=y;
         p_3d.z=z;
-        cout<<x<<" "<<y<<" "<<z<<endl;
+//        cout<<x<<" "<<y<<" "<<z<<endl;
         points3d.push_back(p_3d);
     }
     points3d_file.close();
@@ -134,11 +136,13 @@ int main(int argc,char *argv[]) {
     string img_path = parser.get<String>("p1");
     string points3d_path = parser.get<String>("p2");
     string camera_para_path = parser.get<String>("p3");
-    string img_path1 = img_path + "000001.jpg";
-    string img_path2 = img_path + "000003.jpg";
+    string img_path1 = img_path + "000000.jpg";
+    string img_path2 = img_path + "000001.jpg";
+    string img_path3 = img_path + "000002.jpg";
     cout<<"img_path"<<endl;
     img1 = imread(img_path1);
     img2 = imread(img_path2);
+    img3 = imread(img_path3);
     //pick points on images
     imshow("img1", img1);
     setMouseCallback("img1", onMouse);
@@ -150,6 +154,12 @@ int main(int argc,char *argv[]) {
     if (waitKey(0) == 27) {
         destroyAllWindows();
     }
+    imshow("img3", img3);
+    setMouseCallback("img3", onMouse);
+    if (waitKey(0) == 27) {
+        destroyAllWindows();
+    }
+
     for (int i=0;i<points.size();i++)
     {
         cout<<points[i].x << " "<<points[i].y <<endl;
